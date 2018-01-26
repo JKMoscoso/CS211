@@ -1,0 +1,176 @@
+Normal Case:
+"356 03452 0x223ADF 346.283905805E+53"
+Expected:
+Integer 356
+Octal 03452
+Hexadecimal 0x223ADF
+Float 346.283905805E+53
+
+Actual:
+Integer 356
+Octal 03452
+Hexadecimal 0x223ADF
+Float 346.283905805E+53
+-----
+Case with spaces:
+"          	            1223    "
+Expected:
+Integer 1223
+
+Actual:
+Integer 1223
+------
+Case with some spaces:
+" 54 56 054962    0x48AG68  45 .3459E-0 4537"
+Expected:
+Integer 54
+Integer 56
+Octal 054
+Integer 962
+Hexadecimal 0x48A
+invalid
+Integer 68
+Integer 45
+invalid
+integer 3459E-0
+Integer 4537
+
+Actual:
+integer 54
+integer 56
+octal 054
+integer 962
+hexadecimal 0x48A
+invalid 0x47
+integer 68
+integer 45
+invalid 0x2e
+integer 3459E-0
+integer 4537
+------
+Case above with no spaces:
+"54560549620x48AG6845.3459E-04537"
+Expected:
+Integer 54560549620
+invalid
+Integer 48
+invalid
+invalid
+Float 6845.3459E-04537
+
+Actual:
+integer 54560549620
+invalid 0x78
+integer 48
+invalid 0x41
+invalid 0x47
+float 6845.3459E-04537
+------
+Case with Zeros:
+"0 000 0x000000000A 0.0001E+02"
+Expected:
+Integer 0
+Octal 000
+Hexadecimal 0x000000000A
+Float 0.0001E+02
+
+Actual:
+integer 0
+octal 000
+hexadecimal 0x000000000A
+float 0.0001E+02
+------
+Case with Hexadecimal and other letters:
+"0x123 4x567 0x89A xBA1 0xABCDEFG"
+Expected:
+Hexadecimal 0x123
+Integer 4
+invalid
+Integer 567
+Hexadecimal 0x89A
+invalid
+invalid
+invalid
+Integer 1
+Hexadecimal 0xABCDEF
+invalid
+
+Actual:
+hexadecimal 0x123
+integer 4
+invalid 0x78
+integer 567
+hexadecimal 0x89A
+invalid 0x78
+invalid 0x42
+invalid 0x41
+integer 1
+hexadecimal 0xABCDEF
+invalid 0x47
+------
+Case with incompleted tokens:
+"               234 0x234E+ 23x 0x 059G 1  20xH EX "  
+Expected:
+Integer 234
+Hexadecimal 0x234E
+invalid
+Integer 23
+invalid
+Integer 0
+invalid
+Octal 05
+Integer 9
+invalid
+Integer 1
+Integer 20
+invalid
+invalid
+invalid
+invalid
+
+Actual:
+integer 234
+hexadecimal 0x234E
+invalid 0x2b
+integer 23
+invalid 0x78
+integer 0
+invalid 0x78
+octal 05
+integer 9
+invalid 0x47
+integer 1
+integer 20
+invalid 0x78
+invalid 0x48
+invalid 0x45
+invalid 0x58
+------
+Case with incompleted tokens with no spaces:
+"2340x234E+23x0x059G120xHEX"
+Expected:
+Integer 2340
+invalid
+Float 234E+23
+invalid
+Hexadecimal 0x059
+invalid
+Integer 120
+invalid
+invalid
+invalid
+invalid
+
+Actual:
+integer 2340
+invalid 0x78
+float 234E+23
+invalid 0x78
+hexadecimal 0x059
+invalid 0x47
+integer 120
+invalid 0x78
+invalid 0x48
+invalid 0x45
+invalid 0x58
+
